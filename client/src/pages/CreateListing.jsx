@@ -21,7 +21,7 @@ export default function CreateListing() {
     type: 'rent',
     bedrooms: 1,
     bathrooms: 1,
-    regularPrice: 10000,
+    regularPrice: 50,
     discountPrice: 0,
     offer: false,
     parking: false,
@@ -128,7 +128,7 @@ export default function CreateListing() {
     try {
       if (formData.imageUrls.length < 1)
         return setError('You must upload at least one image');
-      if (formData.discountPrice!== undefined && +formData.regularPrice <= +formData.discountPrice)
+      if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
@@ -282,7 +282,7 @@ export default function CreateListing() {
               <div className='flex flex-col items-center'>
                 <p>Regular price</p>
                 {formData.type === 'rent' && (
-                  <span className='text-xs'>(₹ / month)</span>
+                  <span className='text-xs'>($ / month)</span>
                 )}
               </div>
             </div>
@@ -302,7 +302,7 @@ export default function CreateListing() {
                   <p>Discounted price</p>
 
                   {formData.type === 'rent' && (
-                    <span className='text-xs'>(₹ / month)</span>
+                    <span className='text-xs'>($ / month)</span>
                   )}
                 </div>
               </div>
